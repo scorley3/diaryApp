@@ -104,7 +104,9 @@ class DashboardView extends React.Component {
 	if (this.state.dash == "inline") {
 		return (
 			<View style = {this.state.style}>
-			<Text> test </Text>
+			<Text> Today's Questions </Text>
+			<Text> Scrapbook </Text>
+			<Text> Past Entries </Text>
 			<Button onClick={this.change} active />
 			</View>
 			);
