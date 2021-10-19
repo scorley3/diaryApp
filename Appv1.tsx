@@ -31,7 +31,7 @@ const analytics = getAnalytics(app);
 export default function App() {
   return (
     <View style={styles.container}>
-	  <DashboardView />
+	  <LogInForm />
       <StatusBar style="auto" />
     </View>
   );
@@ -43,12 +43,11 @@ class LogInForm extends React.Component {
 		this.state = {
 			submitted: false,
 			value: "",
-			dashStyle: this.props.log,
+			dashStyle: "inline",
 			style: {
-				display: this.props.log
+				display: "inline"
 			}
 		}
-		const rend = props.render;
 		 this.handleChange = this.handleChange.bind(this);
 		 this.handleSubmit = this.handleSubmit.bind(this);
 	}	
@@ -71,12 +70,13 @@ class LogInForm extends React.Component {
 			<input type = 'submit' value = "log in" />
 			
 		</form>
+		<DashboardView dash = {this.state.dashStyle} />
 		</View>
 		);
 	}
 	handleSubmit(event) {
 		event.preventDefault();
-		this.setState({submitted: true, log: "none", style: {
+		this.setState({submitted: true, dashStyle: "none", style: {
 			display: "none"
 		}}, () => {
 			console.log(this.state);
@@ -90,12 +90,12 @@ class LogInForm extends React.Component {
 class DashboardView extends React.Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
+		console.log(props);
 
 		this.state = {
-			log: "inline",
+			dash: this.props.dash,
 			style: {
-				display: "inline"
+				display: this.props.dash
 			}} , () => {
 				this.render();
 			}
@@ -109,17 +109,16 @@ class DashboardView extends React.Component {
 			style: {
 				display: "none"
 			}});
-		
+			
 		console.log(this.state);
 		console.log("what");
 	}
 	
 	render(props) {
 	console.log(this.state);
-	if (this.state.log == "inline") {
+	if (this.state.dash == "inline") {
 		return (
 			<View style = {this.state.style}>
-			<LogInForm />
 			<View style = {{backgroundColor: "pink"}}>
 			<Text> Today's Questions </Text>
 			</View>
@@ -135,16 +134,7 @@ class DashboardView extends React.Component {
 		} else {
 			return (
 			<View>
-			<View style = {{backgroundColor: "pink"}}>
-			<Text> Today's Questions </Text>
-			</View>
-			<View style = {{backgroundColor: "lightPink"}}>
-			<Text> Scrapbook </Text>
-			</View>
-			<View style = {{backgroundColor: "pink"}}>
-			<Text> Past Entries </Text>
-			</View>
-			<Button onPress={this.change} active />
+			<Text> wowza </Text>
 			</View>
 			);
 		}
