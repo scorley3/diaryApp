@@ -2,6 +2,31 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import useState from 'react';
 import { StyleSheet, Text, View, Button, Component } from 'react-native';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC9nZQLyme_oT3TEFWJgu10lr-U-K9bm6o",
+  authDomain: "diaryapp-44376.firebaseapp.com",
+  projectId: "diaryapp-44376",
+  storageBucket: "diaryapp-44376.appspot.com",
+  messagingSenderId: "762023111661",
+  appId: "1:762023111661:web:1d04bc402fcbdfabded5e4",
+  measurementId: "G-8QJZK358LX",
+  databaseURL: "https://diaryapp-44376-default-rtdb.firebaseio.com/",
+  //storageBucket: "
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
 
 export default function App() {
   return (
@@ -66,6 +91,7 @@ class DashboardView extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log(props);
+
 		this.state = {
 			dash: this.props.dash,
 			style: {
@@ -75,20 +101,8 @@ class DashboardView extends React.Component {
 			}
 		
 		
-		 this.handleClick = this.handleChange.bind(this);
 	}	
-	handleChange(event) {
-		this.setState({
-			dash: this.props.dash,
-			style: {
-				display: this.state.dash
-			}}
-		, () => {
-			this.render();
-			console.log(this.state.style);
-		});
-	}
-	change(event){
+	change = () => {
 		console.log("hi");
 		this.setState({
 			dash: this.props.dash,
@@ -99,15 +113,22 @@ class DashboardView extends React.Component {
 		console.log(this.state);
 		console.log("what");
 	}
+	
 	render(props) {
 	console.log(this.state);
 	if (this.state.dash == "inline") {
 		return (
 			<View style = {this.state.style}>
+			<View style = {{backgroundColor: "pink"}}>
 			<Text> Today's Questions </Text>
+			</View>
+			<View style = {{backgroundColor: "lightPink"}}>
 			<Text> Scrapbook </Text>
+			</View>
+			<View style = {{backgroundColor: "pink"}}>
 			<Text> Past Entries </Text>
-			<Button onClick={this.change} active />
+			</View>
+			<Button onPress={this.change} active />
 			</View>
 			);
 		} else {
